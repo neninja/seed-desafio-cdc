@@ -4,6 +4,12 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# file database
+*.db
+
+# http client
+http-client.private.env.json
+
 ### STS ###
 .apt_generated
 .classpath
