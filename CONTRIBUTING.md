@@ -17,7 +17,7 @@ make clean
 make run
 ```
 
-> Caso queira utilizar debug, execute `make debug` e conecte o Intellij como *Remote Debug* na porta 5005
+> Caso queira utilizar debug, inicie a aplicação com `make debug` e conecte o Intellij como *Remote Debug* na porta 5005
 
 ### Padronização
 
