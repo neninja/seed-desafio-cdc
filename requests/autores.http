@@ -1,0 +1,12 @@
+### Listagem
+GET {{baseUrl}}/autores
+
+### Criação
+POST {{baseUrl}}/autores
+Content-Type: application/json
+
+{
+  "nome": "Autor {{$uuid}}",
+  "email": "autor-{{$uuid}}@exemplo.com",
+  "descricao": "Criado em {{$timestamp}}"
+}

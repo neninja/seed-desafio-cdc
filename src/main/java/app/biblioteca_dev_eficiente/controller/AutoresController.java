@@ -17,15 +17,15 @@ import app.biblioteca_dev_eficiente.repository.AutorRepository;
 
 @RestController
 @RequestMapping("/autores")
-public class AutorController {
+public class AutoresController {
 
   private final AutorRepository autorRepository;
 
-  public AutorController(AutorRepository autorRepository) {
+  public AutoresController(AutorRepository autorRepository) {
     this.autorRepository = autorRepository;
   }
 
-  @GetMapping
+  @GetMapping()
   public List<AutorResponseDto> index() {
     return autorRepository.findAll().stream().map(AutorResponseDto::new).toList();
   }

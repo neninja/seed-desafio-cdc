@@ -9,6 +9,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import org.springframework.util.Assert;
 
 @Entity
 @Table(name = "autores")
@@ -19,11 +23,16 @@ public class Autor {
   private Long id;
 
   @Column(nullable = false)
+  @NotBlank
   private String nome;
 
+  @NotBlank
+  @Email
   @Column(nullable = false)
   private String email;
 
+  @NotBlank
+  @Size(max = 400)
   @Column(nullable = false, length = 400)
   private String descricao;
 
@@ -36,7 +45,8 @@ public class Autor {
   @Deprecated
   protected Autor() {}
 
-  public Autor(String nome, String email, String descricao) {
+  public Autor(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max=400) String descricao) {
+    Assert.hasLength(nome, "Nome obrigatório");
     this.nome = nome;
     this.email = email;
     this.descricao = descricao;
