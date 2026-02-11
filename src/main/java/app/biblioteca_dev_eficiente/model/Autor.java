@@ -1,10 +1,13 @@
 package app.biblioteca_dev_eficiente.model;
 
+import java.time.Instant;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,10 +21,30 @@ public class Autor {
   @Column(nullable = false)
   private String nome;
 
+  @Column(nullable = false)
+  private String email;
+
+  @Column(nullable = false, length = 400)
+  private String descricao;
+
+  @Column(nullable = false, updatable = false)
+  private Instant registradoEm;
+
+  /** @deprecated construtor para uso do JPA */
+  @Deprecated
   protected Autor() {}
 
-  public Autor(String nome) {
+  public Autor(String nome, String email, String descricao) {
     this.nome = nome;
+    this.email = email;
+    this.descricao = descricao;
+  }
+
+  @PrePersist
+  private void prePersist() {
+    if (this.registradoEm == null) {
+      this.registradoEm = Instant.now();
+    }
   }
 
   public Long getId() {
@@ -30,5 +53,17 @@ public class Autor {
 
   public String getNome() {
     return nome;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public String getDescricao() {
+    return descricao;
+  }
+
+  public Instant getRegistradoEm() {
+    return registradoEm;
   }
 }

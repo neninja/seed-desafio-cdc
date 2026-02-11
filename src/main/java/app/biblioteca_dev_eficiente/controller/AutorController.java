@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import app.biblioteca_dev_eficiente.dto.AutorRequestDto;
+import app.biblioteca_dev_eficiente.dto.CreateAutorRequestDto;
 import app.biblioteca_dev_eficiente.dto.AutorResponseDto;
 import app.biblioteca_dev_eficiente.model.Autor;
 import app.biblioteca_dev_eficiente.repository.AutorRepository;
@@ -33,12 +33,12 @@ public class AutorController {
   @PostMapping
   @Transactional
   public ResponseEntity<AutorResponseDto> create(
-      @RequestBody @Valid AutorRequestDto request, UriComponentsBuilder uriBuilder) {
-    Autor autor = new Autor(request.nome());
+          @RequestBody @Valid CreateAutorRequestDto request, UriComponentsBuilder uriBuilder) {
+
+    Autor autor = request.toModel();
     autorRepository.save(autor);
 
     URI location = uriBuilder.path("/autores/{id}").buildAndExpand(autor.getId()).toUri();
-
     return ResponseEntity.created(location).body(new AutorResponseDto(autor));
   }
 }
