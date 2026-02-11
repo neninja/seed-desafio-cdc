@@ -30,7 +30,9 @@ public class Autor {
   @Column(nullable = false, updatable = false)
   private Instant registradoEm;
 
-  /** @deprecated construtor para uso do JPA */
+  /**
+   * @deprecated construtor para uso do JPA
+   */
   @Deprecated
   protected Autor() {}
 
