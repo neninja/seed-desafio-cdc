@@ -11,25 +11,24 @@ import jakarta.persistence.Table;
 @Table(name = "autores")
 public class Autor {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(nullable = false)
-    private String nome;
+  @Column(nullable = false)
+  private String nome;
 
-    protected Autor() {
-    }
+  protected Autor() {}
 
-    public Autor(String nome) {
-        this.nome = nome;
-    }
+  public Autor(String nome) {
+    this.nome = nome;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getNome() {
-        return nome;
-    }
+  public String getNome() {
+    return nome;
+  }
 }

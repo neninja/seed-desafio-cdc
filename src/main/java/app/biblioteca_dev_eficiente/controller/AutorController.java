@@ -1,48 +1,44 @@
 package app.biblioteca_dev_eficiente.controller;
 
-import app.biblioteca_dev_eficiente.dto.AutorRequestDto;
-import app.biblioteca_dev_eficiente.dto.AutorResponseDto;
-import app.biblioteca_dev_eficiente.model.Autor;
-import app.biblioteca_dev_eficiente.repository.AutorRepository;
+import java.net.URI;
+import java.util.List;
+
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
-import java.util.List;
+import app.biblioteca_dev_eficiente.dto.AutorRequestDto;
+import app.biblioteca_dev_eficiente.dto.AutorResponseDto;
+import app.biblioteca_dev_eficiente.model.Autor;
+import app.biblioteca_dev_eficiente.repository.AutorRepository;
 
 @RestController
 @RequestMapping("/autores")
 public class AutorController {
 
-    private final AutorRepository autorRepository;
+  private final AutorRepository autorRepository;
 
-    public AutorController(AutorRepository autorRepository) {
-        this.autorRepository = autorRepository;
-    }
+  public AutorController(AutorRepository autorRepository) {
+    this.autorRepository = autorRepository;
+  }
 
-    @GetMapping
-    public List<AutorResponseDto> index() {
-        return autorRepository.findAll().stream()
-                .map(AutorResponseDto::new)
-                .toList();
-    }
+  @GetMapping
+  public List<AutorResponseDto> index() {
+    return autorRepository.findAll().stream().map(AutorResponseDto::new).toList();
+  }
 
-    @PostMapping
-    @Transactional
-    public ResponseEntity<AutorResponseDto> create(
-            @RequestBody @Valid AutorRequestDto request,
-            UriComponentsBuilder uriBuilder
-    ) {
-        Autor autor = new Autor(request.nome());
-        autorRepository.save(autor);
+  @PostMapping
+  @Transactional
+  public ResponseEntity<AutorResponseDto> create(
+      @RequestBody @Valid AutorRequestDto request, UriComponentsBuilder uriBuilder) {
+    Autor autor = new Autor(request.nome());
+    autorRepository.save(autor);
 
-        URI location = uriBuilder.path("/autores/{id}")
-                .buildAndExpand(autor.getId())
-                .toUri();
+    URI location = uriBuilder.path("/autores/{id}").buildAndExpand(autor.getId()).toUri();
 
-        return ResponseEntity.created(location).body(new AutorResponseDto(autor));
-    }
+    return ResponseEntity.created(location).body(new AutorResponseDto(autor));
+  }
 }
