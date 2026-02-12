@@ -6,4 +6,6 @@ import app.biblioteca_dev_eficiente.model.Autor;
 
 public interface AutorRepository extends JpaRepository<Autor, Long> {
   boolean existsByNome(String nome);
+
+  boolean existsByEmailIgnoreCase(String email);
 }

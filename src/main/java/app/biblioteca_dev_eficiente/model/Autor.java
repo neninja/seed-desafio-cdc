@@ -9,13 +9,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
 import org.springframework.util.Assert;
 
 @Entity
-@Table(name = "autores")
+@Table(
+    name = "autores",
+    uniqueConstraints = {@UniqueConstraint(name = "uk_autores_email", columnNames = "email")})
 public class Autor {
 
   @Id
@@ -45,7 +49,10 @@ public class Autor {
   @Deprecated
   protected Autor() {}
 
-  public Autor(@NotBlank String nome, @NotBlank @Email String email, @NotBlank @Size(max=400) String descricao) {
+  public Autor(
+      @NotBlank String nome,
+      @NotBlank @Email String email,
+      @NotBlank @Size(max = 400) String descricao) {
     Assert.hasLength(nome, "Nome obrigatório");
     this.nome = nome;
     this.email = email;
