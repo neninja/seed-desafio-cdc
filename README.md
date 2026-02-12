@@ -1,5 +1,25 @@
-# Faça um fork desse repositório
+# Biblioteca
 
-Este é um repositório vazio de propósito. A ideia é que você faça um fork para que eu, Alberto, possa usar o github para ter a chance de olhar vários dos códigos produzido por você e seus(as) colegas da Jornada Dev Eficiente :).
+## Utilização
 
-Durante cada uma das seis semanas eu vou pegar código por amostragem e analisar. Feito isso, vou criar um vídeo anonimizando a pessoa que é dona do código, com as minhas observações e postar isso como material de suporte da funcionalidade :).
+### Ambiente
+
+- O banco é o *H2* e está configurado para persistir no arquivo `data/biblioteca.mv.db` a partir do *workdir* da execução. Caso ele não exista será criado.
+
+### Compilação
+
+- Empacote o *jar*
+
+```shell
+make package
+```
+
+### Execução
+
+- Execute a pacote
+
+```shell
+java -Dspring.profiles.active=prod -jar target/biblioteca_dev_eficiente-0.0.1-SNAPSHOT.jar
+```
+
+> Caso precise modificar alguma configuração de `application.properties` ou `application-prod.properties`, como porta, utilize `-Dserver.port=8081` na execução do pacote ou variável como `-DDATASOURCE_URL=/caminho/para/biblioteca-prod`
