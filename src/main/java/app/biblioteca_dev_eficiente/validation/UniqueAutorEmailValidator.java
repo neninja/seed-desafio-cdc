@@ -4,8 +4,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import app.biblioteca_dev_eficiente.dto.CreateAutorRequestDto;
 import app.biblioteca_dev_eficiente.repository.AutorRepository;
+import app.biblioteca_dev_eficiente.request.CreateAutorRequest;
 
 @Component
 public class UniqueAutorEmailValidator implements Validator {
@@ -18,7 +18,7 @@ public class UniqueAutorEmailValidator implements Validator {
 
   @Override
   public boolean supports(Class<?> clazz) {
-    return CreateAutorRequestDto.class.isAssignableFrom(clazz);
+    return CreateAutorRequest.class.isAssignableFrom(clazz);
   }
 
   @Override
@@ -27,7 +27,7 @@ public class UniqueAutorEmailValidator implements Validator {
       return;
     }
 
-    CreateAutorRequestDto request = (CreateAutorRequestDto) target;
+    CreateAutorRequest request = (CreateAutorRequest) target;
 
     String email = request.email();
     if (email == null || email.isBlank()) {

@@ -11,10 +11,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import app.biblioteca_dev_eficiente.dto.AutorResponseDto;
-import app.biblioteca_dev_eficiente.dto.CreateAutorRequestDto;
 import app.biblioteca_dev_eficiente.model.Autor;
 import app.biblioteca_dev_eficiente.repository.AutorRepository;
+import app.biblioteca_dev_eficiente.request.CreateAutorRequest;
+import app.biblioteca_dev_eficiente.response.AutorResponse;
 import app.biblioteca_dev_eficiente.validation.UniqueAutorEmailValidator;
 
 @RestController
@@ -36,19 +36,19 @@ public class AutoresController {
   }
 
   @GetMapping()
-  public List<AutorResponseDto> index() {
-    return autorRepository.findAll().stream().map(AutorResponseDto::new).toList();
+  public List<AutorResponse> index() {
+    return autorRepository.findAll().stream().map(AutorResponse::new).toList();
   }
 
   @PostMapping
   @Transactional
-  public ResponseEntity<AutorResponseDto> create(
-      @RequestBody @Valid CreateAutorRequestDto request, UriComponentsBuilder uriBuilder) {
+  public ResponseEntity<AutorResponse> create(
+      @RequestBody @Valid CreateAutorRequest request, UriComponentsBuilder uriBuilder) {
 
     Autor autor = request.toModel();
     autorRepository.save(autor);
 
     URI location = uriBuilder.path("/autores/{id}").buildAndExpand(autor.getId()).toUri();
-    return ResponseEntity.created(location).body(new AutorResponseDto(autor));
+    return ResponseEntity.created(location).body(new AutorResponse(autor));
   }
 }

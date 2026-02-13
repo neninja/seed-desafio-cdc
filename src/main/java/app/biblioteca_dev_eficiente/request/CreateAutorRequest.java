@@ -1,4 +1,4 @@
-package app.biblioteca_dev_eficiente.dto;
+package app.biblioteca_dev_eficiente.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 import app.biblioteca_dev_eficiente.model.Autor;
 
-public record CreateAutorRequestDto(
+public record CreateAutorRequest(
     @NotBlank String nome,
     @NotBlank @Email String email,
     @NotBlank @Size(max = 400) String descricao) {

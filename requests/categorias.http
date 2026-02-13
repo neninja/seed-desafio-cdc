@@ -1,0 +1,10 @@
+### Listagem
+GET {{baseUrl}}/categorias
+
+### Criação
+POST {{baseUrl}}/categorias
+Content-Type: application/json
+
+{
+  "nome": "Categoria {{$uuid}}"
+}
