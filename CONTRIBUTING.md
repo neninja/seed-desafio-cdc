@@ -29,6 +29,12 @@ make run
 make fmt
 ```
 
+### Compilação do artefato
+
+```shell
+make package
+```
+
 ### Dicas
 
 - Utilize as chamadas HTTP de `requests` e configure, se necessário, o `http-client.private.env.json`
