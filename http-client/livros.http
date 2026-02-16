@@ -1,0 +1,18 @@
+### Listagem
+GET {{baseUrl}}/livros
+
+### Criação
+POST {{baseUrl}}/livros
+Content-Type: application/json
+
+{
+  "titulo": "Livro {{$uuid}}",
+  "resumo": "Resumo do livro (até 500 caracteres).",
+  "sumario": "Sumário opcional do livro.",
+  "preco": 29.90,
+  "numeroPaginas": 150,
+  "isbn": "978-3-16-148410-0",
+  "publicadoEm": "2030-01-01T10:00:00Z",
+  "categoriaId": 1,
+  "autorId": 1
+}
