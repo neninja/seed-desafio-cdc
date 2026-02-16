@@ -1,11 +1,13 @@
 # Biblioteca
 
+Desafio da jornada do curso "Dev mais eficiente"
+
 ## Utilização
 
 ### Ambiente
 
 - O banco é o *H2* e está configurado para persistir no arquivo `data/biblioteca.mv.db` a partir do *workdir* da execução. Caso ele não exista será criado.
-
+- Necessário JRE 21
 
 ### Execução
 
